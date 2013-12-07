@@ -66,14 +66,14 @@
             }
         };
     }());
-	(function() {
+    (function() {
         var _this = this;
-		this.settings = {
-			enabled: true,
-			enabledVehicles: [true, true, true, true, true, true, true, true, true, true, true]
-		};
+        this.settings = {
+            enabled: true,
+            enabledVehicles: [true, true, true, true, true, true, true, true, true, true, true]
+        };
         $.extend(this.settings, JSON.parse(Surface.cookieGet("respawnTimerSettings") || "null"));
-		this.vehicleInfo = [
+        this.vehicleInfo = [
             { displayName: "Tank",             iconId: 3715700347, respawnTime: 90000 },
             { displayName: "IFV",              iconId: 1870125354, respawnTime: 90000 },
             { displayName: "Anti-Air",         iconId: 2077838283, respawnTime: 90000 },
@@ -99,21 +99,21 @@
             this.resetRespawnTimer();
             bs.connection.addEventListener("connect", function() {
                 BattleScreen.prototype.onConnect.apply(bs, arguments);
-				var userPresence = Surface.globalContext.session.user.presence;
+                var userPresence = Surface.globalContext.session.user.presence;
                 // Get respawn delay from server page
-				$.ajax({
-					url: Surface.valOut(S.Modifier.urlformat("/{_section}/{_language}/servers/show/{platform}/{guid}/{slug}/", Surface.urlContext, {
-						"guid":     userPresence.playingMp.serverGuid,
-						"platform": S.Modifier.lower($S.callFunction("base.platform", userPresence.playingMp.platform)),
-						"slug":     S.Modifier.slugify(userPresence.playingMp.serverName)
-					})),
-					beforeSend: function(xmlHttpRequest, settings) {
-						xmlHttpRequest.setRequestHeader("X-AjaxNavigation", "1");
-					},
-					success: function(data) {
-						_this.respawnDelay = data.context.server.settings.vvsd / 100;
-					}
-				});
+                $.ajax({
+                    url: Surface.valOut(S.Modifier.urlformat("/{_section}/{_language}/servers/show/{platform}/{guid}/{slug}/", Surface.urlContext, {
+                    "guid":     userPresence.playingMp.serverGuid,
+                    "platform": S.Modifier.lower($S.callFunction("base.platform", userPresence.playingMp.platform)),
+                    "slug":     S.Modifier.slugify(userPresence.playingMp.serverName)
+                })),
+                beforeSend: function(xmlHttpRequest, settings) {
+                    xmlHttpRequest.setRequestHeader("X-AjaxNavigation", "1");
+                },
+                success: function(data) {
+                    _this.respawnDelay = data.context.server.settings.vvsd / 100;
+                }
+                });
             }.bind(this));
             bs.connection.addEventListener("disconnect", function() {
                 BattleScreen.prototype.onDisconnect.apply(bs, arguments);
@@ -127,28 +127,28 @@
                         result = jsDiff.diff(this.lastIcon, newState.icon);
                     for (var i = 0; i < result.added.length; i++) {
                         var index = result.added[i];
-						if (newState.teamstate[index] == TEAMSTATE_TEAM || newState.teamstate[index] == TEAMSTATE_SQUAD || newState.teamstate[index] == TEAMSTATE_NEUTRAL) {
-							var bestVehicle = -1, bestScore = 999999;
-							for (var x = this.vehicleRespawns.length; x--; x) {
-								if (newState.icon[index] == this.vehicleRespawns[x].vehicleType) {
-									var dX = Math.abs(newState.x[index] - this.vehicleRespawns[x].lastX),
-										dY = Math.abs(newState.y[index] - this.vehicleRespawns[x].lastY),
-										distance = dX * dX + dY * dY;
-									if (distance < 2500) { // TODO: calculate a good minimum distance.
-										// Score is calculated to find the vehicle with the best distance to index ratio.
-										var score = (Math.abs(index - this.vehicleRespawns[x].lastIndex) + 1) / distance;
-										if (score < bestScore) {
-											bestVehicle = x;
-											bestScore = score;
-										}
-									}
-								}
-							}
-							if (bestVehicle != -1) {
-								console.log("found missing vehicle: " + this.vehicleRespawns[bestVehicle].vehicleType + " score: " + bestScore);
-								this.vehicleRespawns.splice(bestVehicle, 1);
-							}
-						}
+                        if (newState.teamstate[index] == TEAMSTATE_TEAM || newState.teamstate[index] == TEAMSTATE_SQUAD || newState.teamstate[index] == TEAMSTATE_NEUTRAL) {
+                            var bestVehicle = -1, bestScore = 999999;
+                            for (var x = this.vehicleRespawns.length; x--; x) {
+                                if (newState.icon[index] == this.vehicleRespawns[x].vehicleType) {
+                                    var dX = Math.abs(newState.x[index] - this.vehicleRespawns[x].lastX),
+                                        dY = Math.abs(newState.y[index] - this.vehicleRespawns[x].lastY),
+                                        distance = dX * dX + dY * dY;
+                                    if (distance < 2500) { // TODO: calculate a good minimum distance.
+                                        // Score is calculated to find the vehicle with the best distance to index ratio.
+                                        var score = (Math.abs(index - this.vehicleRespawns[x].lastIndex) + 1) / distance;
+                                        if (score < bestScore) {
+                                            bestVehicle = x;
+                                            bestScore = score;
+                                        }
+                                    }
+                                }
+                            }
+                            if (bestVehicle != -1) {
+                                console.log("found missing vehicle: " + this.vehicleRespawns[bestVehicle].vehicleType + " score: " + bestScore);
+                                this.vehicleRespawns.splice(bestVehicle, 1);
+                            }
+                        }
                     }
                     for (var i = 0; i < result.existing.length; i++) {
                         var newIndex = result.existing[i].newPos;
@@ -310,5 +310,5 @@
             }
         });
         this.onPageShow();
-	}());
+    }());
 }());
