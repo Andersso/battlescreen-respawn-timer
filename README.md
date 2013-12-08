@@ -1,5 +1,5 @@
 Vehicle Respawn Timer for Battlescreen
-==========================
+-------------
 
 This is a userscript that allows you to see the approximate time remaining for each destroyed vehicle while playing.
 
