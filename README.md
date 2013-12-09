@@ -11,4 +11,4 @@ This is a userscript that allows you to see the approximate time remaining for e
 Download the userscript [here](https://github.com/Andersso/battlescreen-respawn-timer/raw/master/bs-respawn-timer.user.js)
 
 ### Screenshot ######
-![Screenshot](http://i.imgur.com/rIPn071.jpg)
+![Screenshot](http://i.imgur.com/6yyUmtV.jpg)
