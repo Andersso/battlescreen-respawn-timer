@@ -235,6 +235,7 @@
             c.push('<header>\n <p>Estimated Respawns</p>\n </header>\n ');
             c.push('<div class="box-content" id="timer-list"></div>\n </div>\n </div>\n </div>\n ');
             $("#uioverlay").append(c.join(""));
+            $("#toggle-fullscreen").css("z-index", 12);
         };
         this.detachRespawnTimer = function() {
             this.resetRespawnTimer();
