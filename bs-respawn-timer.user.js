@@ -75,10 +75,10 @@
         $.extend(this.settings, JSON.parse(Surface.cookieGet("respawnTimerSettings") || "null"));
         this.vehicleInfo = [
             { displayName: "Tank",             iconId: 3715700347, respawnTime: 90000 },
-            { displayName: "IFV",              iconId: 1870125354, respawnTime: 90000 },
-            { displayName: "Anti-Air",         iconId: 2077838283, respawnTime: 90000 },
+            { displayName: "IFV",              iconId: 1870125354, respawnTime: 60000 },
+            { displayName: "Anti-Air",         iconId: 2077838283, respawnTime: 60000 },
             { displayName: "Mobile Artillery", iconId: 3138927120, respawnTime: 90000 },
-            { displayName: "AMTRAC",           iconId: 2800623557, respawnTime: 90000 },
+            { displayName: "AMTRAC",           iconId: 2800623557, respawnTime: 60000 },
             { displayName: "Stealth Jet",      iconId: 2303933806, respawnTime: 90000 },
             { displayName: "Attack Jet",       iconId: 2421515579, respawnTime: 90000 },
             { displayName: "Attack Heli",      iconId: 1002462244, respawnTime: 90000 },
