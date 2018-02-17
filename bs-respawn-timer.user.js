@@ -167,7 +167,8 @@
                         if (this.lastTeam[index] == -1) {
                             for (var x = 0; x < this.vehicleInfo.length; x++) {
                                 if (this.lastIcon[index] == this.vehicleInfo[x].iconId && this.settings.enabledVehicles[x]) {
-                                    var y, respawnTime = currentTime + this.vehicleInfo[x].respawnTime * this.respawnDelay;
+                                    var delay = (this.vehicleInfo[x].realTime) ? 1 : this.respawnDelay; //For Bomber
+                                    var y, respawnTime = currentTime + this.vehicleInfo[x].respawnTime * delay;
                                     for (y = 0; y < this.vehicleRespawns.length; y++) {
                                         if (respawnTime <= this.vehicleRespawns[y].respawnTime) {
                                             break;
