@@ -300,7 +300,10 @@
         $(document).on("pageshow.global", this.onPageShow = function() {
             var componentName = Surface.globalContext.componentName;
             if (componentName == "battlescreen" && _this.settings.enabled) {
-                _this.attachRespawnTimer();
+                if (bs)
+                    _this.attachRespawnTimer();
+                else
+                    setTimeout(_this.onPageShow, 20);
             } else if (componentName == "profile" && Surface.globalContext.activeUserPage == "edit-notifications") {
                 _this.injectProfileSettings();
             }
