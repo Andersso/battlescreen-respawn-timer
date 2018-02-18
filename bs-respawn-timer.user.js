@@ -70,11 +70,12 @@
         var _this = this;
         this.settings = {
             enabled: true,
-            enabledVehicles: [true, true, true, true, true, true, true, true, true, true, true]
+            enabledVehicles: [true, true, true, true, true, true, true, true, true, true, true, true, true]
         };
         $.extend(this.settings, JSON.parse(Surface.cookieGet("respawnTimerSettings") || "null"));
         this.vehicleInfo = [
             { displayName: "Tank",             iconId: 3715700347, respawnTime: 90000 },
+            { displayName: "HT-95 LEVKOV 10",  iconId: 2006403204, respawnTime: 90000 },
             { displayName: "IFV",              iconId: 1870125354, respawnTime: 60000 },
             { displayName: "Anti-Air",         iconId: 2077838283, respawnTime: 60000 },
             { displayName: "Mobile Artillery", iconId: 3138927120, respawnTime: 90000 },
@@ -84,7 +85,8 @@
             { displayName: "Attack Heli",      iconId: 1002462244, respawnTime: 90000 },
             { displayName: "Scout Heli",       iconId: 738928977,  respawnTime: 60000 },
             { displayName: "Transport Heli",   iconId: 3146048021, respawnTime: 60000 },
-            { displayName: "Attack Craft",     iconId: 1385519273, respawnTime: 90000 }
+            { displayName: "Attack Craft",     iconId: 1385519273, respawnTime: 90000 },
+            { displayName: "Bomber",           iconId: 2324869749, respawnTime: 90000, realTime: true }
         ];
         this.resetRespawnTimer = function () {
             this.lastX = [];
@@ -165,7 +167,8 @@
                         if (this.lastTeam[index] == -1) {
                             for (var x = 0; x < this.vehicleInfo.length; x++) {
                                 if (this.lastIcon[index] == this.vehicleInfo[x].iconId && this.settings.enabledVehicles[x]) {
-                                    var y, respawnTime = currentTime + this.vehicleInfo[x].respawnTime * this.respawnDelay;
+                                    var delay = (this.vehicleInfo[x].realTime) ? 1 : this.respawnDelay; //For Bomber
+                                    var y, respawnTime = currentTime + this.vehicleInfo[x].respawnTime * delay;
                                     for (y = 0; y < this.vehicleRespawns.length; y++) {
                                         if (respawnTime <= this.vehicleRespawns[y].respawnTime) {
                                             break;
